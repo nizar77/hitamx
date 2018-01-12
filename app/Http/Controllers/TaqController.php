@@ -9,7 +9,8 @@ class TaqController extends Controller
 {
     public function index()
     {
-    	return view('taq.index');
+        $taqs=taq::all();
+        return view('taq.index',compact('taqs'));
     }
 
     public function buat()
@@ -19,8 +20,10 @@ class TaqController extends Controller
     public function simpan(Request $request)
     {
     	$tags = New taq;
-    	$tags ->taq =$request->taq;
-    	dd($tags);
+        $tags ->taq = $request->taq;
+       // dd($tags);
+        $tags->save();
+        return redirect()->route('taq.index');
     }
 
 }

@@ -14,7 +14,7 @@
     <input type="text" class="form-control" name="taq" placeholder="taq" />
 	</div>
 	<div class="form-group">
-    <button class="btn btn-primary btn-block">Tambah taq</button>
+    <button class="btn btn-primary btn-block" type="submit">Tambah taq</button>
     </div>
     </form>
   </div>

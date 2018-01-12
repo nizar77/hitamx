@@ -15,6 +15,7 @@ class CreateTaqsTable extends Migration
     {
         Schema::create('taqs', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('taq',75);
             $table->timestamps();
         });
     }
