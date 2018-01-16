@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\models\Kategori;
 
-class KategoriController extends Controller
+class AlbumController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +13,7 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        $ktgs=Kategori::all();
-        return view('kategori.index',compact('ktgs'));
+        //
     }
 
     /**
@@ -25,7 +23,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        return view('kategori.buat');
+        //
     }
 
     /**
@@ -36,10 +34,7 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        $ktg = New Kategori;
-        $ktg->kategori=$request->kategori;
-        $ktg->save();
-        return redirect()->route('kategori.index');
+        //
     }
 
     /**
@@ -61,8 +56,7 @@ class KategoriController extends Controller
      */
     public function edit($id)
     {
-        $kt = Kategori::find($id);
-        return View('kategori.edit', compact('kt'));
+        //
     }
 
     /**
@@ -74,11 +68,7 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $ktg = Kategori::find($id);
-        $ktg->kategori=$request->kategori;
-        $ktg->save();
-        return redirect()->route('kategori.index');
-
+        //
     }
 
     /**
@@ -89,8 +79,6 @@ class KategoriController extends Controller
      */
     public function destroy($id)
     {
-        $ktg=Kategori::find($id);
-        $ktg->delete();
-        return redirect()->route('kategori.index');
+        //
     }
 }
