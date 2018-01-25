@@ -39,7 +39,7 @@
           <div class='col-md-9 col-xs-12'> 
             <select type="text" name="judul" class ='form-control'>
             <option value="">=========</option> 
-			<option value="1">qwqwq</option> 
+			<option value="1">qqwqwq</option> 
 			<option value="2">kldf dfdjklf</option> 
 			<option value="3">gurauan</option> 
            </select>            

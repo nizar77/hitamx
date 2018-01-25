@@ -4,7 +4,7 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class album extends Model
+class Album extends Model
 {
     protected $table = 'albums';
     protected $fillable = array('nama','deskripsi', 'cover_album');

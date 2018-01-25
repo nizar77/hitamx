@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\models\Post;
 
 class Postcontroller extends Controller
 {
@@ -13,7 +14,7 @@ class Postcontroller extends Controller
      */
     public function index()
     {
-        //
+        return view('post.index');
     }
 
     /**

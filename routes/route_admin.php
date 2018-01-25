@@ -1,6 +1,6 @@
 <?php 
 //Route::resource('/taq','TaqController');
-Route::get('/taq','TaqController@index')->name('taq.index');
+Route::get('/tag','TaqController@index')->name('taq.index');
 Route::get('/taq/buat','TaqController@buat')->name('taq.buat');
 Route::post('/taq/buat','TaqController@simpan')->name('taq.simpan');
 Route::get('/taq/{id}/edit','TaqController@edit')->name('taq.edit');

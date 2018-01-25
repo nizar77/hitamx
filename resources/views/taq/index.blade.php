@@ -12,8 +12,8 @@
         <?php 
         $i=1;
         ?>     
-	 	@foreach($taqs as $taq)	
-	 		<tr><td>{{$i++}}</td><td>{{$taq->taq}}</td><td><div class="btn-group" role="group" aria-label="">	 			
+	 	@foreach($tags as $taq)	
+	 		<tr><td>{{$i++}}</td><td>{{$taq->tag}}</td><td><div class="btn-group" role="group" aria-label="">	 			
 			  <a href="{{route('taq.edit', $taq->id)}}"  class="btn btn-success btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
 			  <a href="{{route('taq_hapus',$taq->id)}}" type="button" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></a> </div>
 			</td>

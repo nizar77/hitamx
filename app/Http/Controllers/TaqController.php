@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\models\taq;
+use App\models\Tag;
 
 class TaqController extends Controller
 {
     public function index()
     {
-        $taqs=taq::all();
-        return view('taq.index',compact('taqs'));
+        $tags=tag::all();
+        return view('taq.index')->with('tags',$tags);
     }
 
     public function buat()
@@ -19,28 +19,28 @@ class TaqController extends Controller
     }
     public function simpan(Request $request)
     {
-    	$tags = New taq;
-        $tags ->taq = $request->taq;
+    	$tags = New Tag;
+        $tags ->tag = $request->taq;
        // dd($tags);
         $tags->save();
         return redirect()->route('taq.index');
     }
     public function edit($id) 
     {
-        $taq=taq::find($id);
+        $taq=Tag::find($id);
         return view('taq.edit',compact('taq'));
     }
     public function update(Request $request, $id)
     {
-        $taq=taq::findOrFail($id);
-        $taq->taq=$request->taq;
+        $taq=Tag::findOrFail($id);
+        $taq->tag=$request->taq;
         $taq->save();
         return redirect()->route('taq.index');
     }
 
     public function hapus($id)
     {
-    	$taq = taq::findOrFail($id);
+    	$taq = Tag::findOrFail($id);
     	$taq->delete();//->delete();
     	return redirect()->route('taq.index');
     }
