@@ -14,6 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('posthitam','Postcontroller');
+//Route::resource('posthitam','Postcontroller');
 Route::resource('/kategori','KategoriController');
 require ('route_admin.php');

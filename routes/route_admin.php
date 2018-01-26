@@ -10,6 +10,10 @@ Route::get('/taq_hapus/{id}','TaqController@hapus')->name('taq_hapus');
  * albums
  */
 Route::Resource('/album','AlbumController');
+Route::Resource('/posthitam','PostController');
+//Route::get('/post','Postcontroller@buat')->name('post.buat');
+Route::get('resizeImage', 'ImageController@resizeImage');
+Route::post('resizeImagePost','ImageController@resizeImagePost')->name('resizeImagePost');
 
 
 

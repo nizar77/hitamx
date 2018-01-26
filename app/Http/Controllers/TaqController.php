@@ -21,7 +21,6 @@ class TaqController extends Controller
     {
     	$tags = New Tag;
         $tags ->tag = $request->taq;
-       // dd($tags);
         $tags->save();
         return redirect()->route('taq.index');
     }
