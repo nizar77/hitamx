@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\models\Images;
+use App\models\Gambar;
 use Session;
 use Image;
 
@@ -20,7 +20,7 @@ class ImageController extends Controller
 	    	
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-   		    $image = $request->file('image');
+   		  $image = $request->file('image');
         $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
         $destinationPath = public_path('/thumbnail');
         $img = Image::make($image->getRealPath());

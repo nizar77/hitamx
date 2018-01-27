@@ -3,6 +3,7 @@
 @section('content')
 
  <div class="container">
+ <div class="col-md-11 row">
 
 <h1>Resize Image Uploading Demo</h1>
 
@@ -27,18 +28,18 @@
 	<div class="col-md-4">
 		<strong>Original Image:</strong>
 		<br/>
-		<img src="/images/{{ Session::get('imageName') }}" />
-	</div>
+		<img src="/images/{{ Session::get('imageName') }}" class="img-responsive" /
+>	</div>
 
 	<div class="col-md-4">
 		<strong>Thumbnail Image:</strong>
 		<br/>
-		<img src="/thumbnail/{{ Session::get('imageName') }}" />
+		<img src="/thumbnail/{{ Session::get('imageName') }}" class="img-responsive" />
 	</div>
 </div>
 @endif
 
-  <div class="col-md-11">
+  
   	<br>
  	<div class="pane panel-primary">
  	  <div class="panel panel-heading"> Buat Kategori</div>

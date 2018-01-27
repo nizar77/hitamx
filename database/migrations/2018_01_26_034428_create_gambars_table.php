@@ -15,7 +15,7 @@ class CreateGambarsTable extends Migration
     {
         Schema::create('gambars', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('gambar');
+            $table->string('imageName');
             $table->string('size')->nullable();
             
         });
