@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\models\Post;
 use App\models\Kategori;
+use App\models\Tag;
 use Session;
 
 class PostController extends Controller
@@ -28,7 +29,8 @@ class PostController extends Controller
     {
         
         $kategoris = Kategori::all();
-        return view('post.buat')->with('kategoris',$kategoris);
+        $tags = Tag::all();
+        return view('post.buat')->with('kategoris',$kategoris)->withTags($tags);
     }
 
     /**
@@ -59,7 +61,7 @@ class PostController extends Controller
         $post->kategori_id=$request->kategori;
         $post->tag_id = $request->tag;
         //$post->image_post=$filename;//'filename';
-        $post->save();
+        dd($post);//->save();
         }
        return redirect()->route('posthitam.index')->with($post->judul);
 

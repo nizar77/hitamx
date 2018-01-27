@@ -28,25 +28,23 @@
           <label class="control-label col-md-2">Kategori</label>
 			 <div class="col-md-9">
 			 <select type="text" name="kategori" class="form-control">
-			 	@foreach($kategoris as $kt)
-					
-					<option value="{{$kt->id}}">{{$kt->kategori}}</option>
+                <option value="">---</option>
+                @foreach($kategoris as $kt)
+				<option value="{{$kt->id}}">{{$kt->kategori}}</option>
 			     @endforeach
 				</select>
 			 </div>	
 		  </div>
 
-		  		
-          
-          <div class='form-group'>
+		 <div class='form-group'>
           <label class="control-label col-md-2">Tag</label>
           <div class='col-md-9 col-xs-12'> 
-            <select type="text" name="tag" class ='form-control'>
-            <option value="">=========</option> 
-			<option value="1">qqwqwq</option> 
-			<option value="2">kldf dfdjklf</option> 
-			<option value="3">gurauan</option> 
-           </select>            
+            <select type="text" name="tags" class ='form-control'>
+             <option value="0">----</option>   
+            @foreach($tags as $tag)
+            <option value="{{$tag->id}}">{{$tag->tag}}</option> 
+            @endforeach
+			</select>            
           </div>
          </div>
 
@@ -61,16 +59,11 @@
          	<button  class="btn btn-primary" type="submit">Post</button>
          	<div class="btn btn-warning">Cancel</div>
          </div>
-
          </div>
-
-
 		  </form>
-
 			</div>
             <div class="panel-footer">footer</div>			
 		</div>
 	</div>
 </div>
-
 @endsection
