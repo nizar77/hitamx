@@ -18,13 +18,9 @@ class CreatePostsTable extends Migration
             $table->string('judul');
             $table->string('slug');
             $table->text('isi_post');
-            $table->integer('kategori_id')->nulabble()->unsigned();
+            $table->integer('kategori_id')->nullable()->unsigned();
             $table->foreign('kategori_id')->references('id')->on('kategoris');
-            $table->string('image_post');
-            $table->integer('tag_id')->nullable()->unsigned();
-            $table->foreign('tag_id')->references('id')->on('tags');
-
-
+            $table->string('image_post')->nullable();
             $table->timestamps();
         });
     }

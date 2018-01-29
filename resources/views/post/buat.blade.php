@@ -1,19 +1,31 @@
 @extends('theme_admin/dashboard')
+@section('title',"|Post Create")
+@section('styles')
+<link rel="stylesheet" type="text/css" href="{{asset('css/select2.min.css')}}" />
+<style>
+
+.form-control{
+    background:transparent;
+    color:#fff;
+}
+.select2-multi{
+    color:#000;
+}
+</style>
+@endsection
 @section('content')
 <div class="container">
 	<div class="col-md-11">
 	 <h1>Judul</h1><i class="glyphicon glyphicon-plus"></i>
 		<btn class="btn btn-primary">buat</btn>
-		<div class="panel panel">
-			<div class="panel panel-heading panel-primary">ddsdsds</div>
-			<div class="panel panel-body">
+		
 			 <form class="form-horizontal" role="form" action="{{route('posthitam.store')}}" method="POST" enctype="multipart/form-data">
 			 	{{csrf_field()}}
 
 		 <div class='form-group'>
           <label class="control-label col-md-2">Judul berita</label>
           <div class='col-md-9 col-xs-12'> 
-            <input type="text" name="judul" class ='form-control', placeholder ='judul berita' /> 
+            <input type="text" name="judul" class ="form-control" placeholder ="judul berita"> 
           </div>
          </div>
 				
@@ -39,7 +51,7 @@
 		 <div class='form-group'>
           <label class="control-label col-md-2">Tag</label>
           <div class='col-md-9 col-xs-12'> 
-            <select type="text" name="tags" class ='form-control'>
+            <select type="text" name="tags[]" class ='form-control select2-multi' multiple='multiple' style="color:000;">
              <option value="0">----</option>   
             @foreach($tags as $tag)
             <option value="{{$tag->id}}">{{$tag->tag}}</option> 
@@ -56,14 +68,18 @@
          </div>
          <div class="form-group">
          	<div class="col-md-2 col-md-offset-2">
-         	<button  class="btn btn-primary" type="submit">Post</button>
-         	<div class="btn btn-warning">Cancel</div>
+         	    <button  class="btn btn-primary" type="submit">Post</button>
+         	    <div class="btn btn-warning">Cancel</div>
+             </div>
          </div>
-         </div>
-		  </form>
-			</div>
-            <div class="panel-footer">footer</div>			
-		</div>
-	</div>
-</div>
+	</form>
+ </div>
+</div>     
+@endsection   
+@section('scripts')
+<script src="{{asset('js/select2.min.js') }}" ></script>
+   <script type='text/javascript'>
+        $('.select2-multi').select2();
+    </script>
 @endsection
+

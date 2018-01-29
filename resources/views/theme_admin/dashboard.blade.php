@@ -6,18 +6,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>@yield('title')</title>
-
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('css/admindashboar.min.css')}}">
+        @yield('styles')
 
         <!-- Styles -->    
     </head>
     <body>
     @yield('content')
-
-    <script type="text/javascript" src="{{asset('js/app.js') }}"></script>
-    @yield('script')
-    </body>
+    
+   <script type="text/javascript" src="{{asset('js/app.js') }}"></script>
+    @yield('scripts')
+</body>
 </html>

@@ -17,7 +17,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('post.index');
+        $posts = Post::all();
+        return view('post.index',compact('posts'));
+
     }
 
     /**
@@ -51,21 +53,22 @@ class PostController extends Controller
         $post->slug=$slug;
         $post->isi_post=$request->isi_post;
         $post->kategori_id=$request->kategori;
-        $post->tag_id = $request->tag;
         $post->image_post=$filename;//'filename';
+        
         $post->save();
+        $post->tags()->sync($request->tags,false);
         }else{
         $post->judul=$request->judul;        
         $post->slug=$slug;
         $post->isi_post=$request->isi_post;
         $post->kategori_id=$request->kategori;
-        $post->tag_id = $request->tag;
-        //$post->image_post=$filename;//'filename';
-        dd($post);//->save();
+        $post->save();
+        //dd($post);//->save();
+        $post->tags()->sync($request->tags,false);
+        
         }
        return redirect()->route('posthitam.index')->with($post->judul);
-
-       
+      
     }
 
     /**
