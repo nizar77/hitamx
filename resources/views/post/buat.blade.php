@@ -5,12 +5,12 @@
 <style>
 
 .form-control{
-    background:transparent;
-    color:#fff;
+    background: transparent !important;
+   color:#fff;
 }
-.select2-multi{
-    color:#000;
-}
+option:not(:checked) {
+    background-color: #310640 !important;
+}  
 </style>
 @endsection
 @section('content')
@@ -51,7 +51,7 @@
 		 <div class='form-group'>
           <label class="control-label col-md-2">Tag</label>
           <div class='col-md-9 col-xs-12'> 
-            <select type="text" name="tags[]" class ='form-control select2-multi' multiple='multiple' style="color:000;">
+            <select id="tags" type="text" name="tags[]" class ='form-control select2-multi' multiple='multiple' />
              <option value="0">----</option>   
             @foreach($tags as $tag)
             <option value="{{$tag->id}}">{{$tag->tag}}</option> 
@@ -79,7 +79,7 @@
 @section('scripts')
 <script src="{{asset('js/select2.min.js') }}" ></script>
    <script type='text/javascript'>
-        $('.select2-multi').select2();
+        $('.select2-multi').select2({'allowClear': true});
     </script>
 @endsection
 

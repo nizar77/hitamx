@@ -53,7 +53,7 @@ class PostController extends Controller
         $post->slug=$slug;
         $post->isi_post=$request->isi_post;
         $post->kategori_id=$request->kategori;
-        $post->image_post=$filename;//'filename';
+        $post->image_post=$filename;
         
         $post->save();
         $post->tags()->sync($request->tags,false);
@@ -79,7 +79,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $post=Post::find($id);
+        return view('post.show',['post'=>$post]); 
     }
 
     /**
@@ -90,7 +91,19 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post=Post::find($id);
+        $kategoris=Kategori::all();
+        $kat = array();
+        foreach ($kategoris as $kategori){
+            $kat[$kategori->id] = $kategori->kategori;
+        }
+
+        $tags = Tag::all();
+        $tags2 = array();
+        foreach($tags as $tag){
+            $tags2[$tag->id]=$tag->tag;
+        }
+        return view('post.edit')->withPost($post)->withKategoris($kat)->withTags($tags2);
     }
 
     /**
@@ -102,7 +115,18 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post=Post::find($id);
+
+        if($request->hasFile('image_post')){
+            
+        $post->judul=$request->judul;
+        $post->isi_post=$request->isi_post;
+        $post->kategori_id=$request->kategori;
+        $post->image_post=$request->image_post;
+        dd($post);
+        }
+        return $post;
+        
     }
 
     /**
