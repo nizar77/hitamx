@@ -84,15 +84,6 @@ class PostController extends Controller
     }
 
     /**
-Server not found
-
-Firefox can’t find the server at transtv.co.www.id.
-
-    Check the address for typing errors such as ww.example.com instead of www.example.com
-    If you are unable to load any pages, check your computer’s network connection.
-    If your computer or network is protected by a firewall or proxy, make sure that Firefox is permitted to access the Web.
-
-
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
