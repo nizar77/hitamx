@@ -84,14 +84,23 @@ class PostController extends Controller
     }
 
     /**
+Server not found
+
+Firefox can’t find the server at transtv.co.www.id.
+
+    Check the address for typing errors such as ww.example.com instead of www.example.com
+    If you are unable to load any pages, check your computer’s network connection.
+    If your computer or network is protected by a firewall or proxy, make sure that Firefox is permitted to access the Web.
+
+
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($post)
     {
-        $post=Post::find($id);
+        $post=Post::find($post);
         $kategoris=Kategori::all();
         $kat = array();
         foreach ($kategoris as $kategori){
@@ -113,20 +122,35 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $post)
     {
-        $post=Post::find($id);
-
+        $post=Post::find($post);
+        $slug = str_slug($request->judul); 
         if($request->hasFile('image_post')){
+            if(!$post->image_post == 0){
+                unlink(public_path('uploadPost/'.$post->image_post));
+          }
+        $filename = time().'_'.$slug.'.'.GetOriginalClientExtension();
+        request()->image_post->move(public_path('uploadPost'),$filename);
             
         $post->judul=$request->judul;
         $post->isi_post=$request->isi_post;
         $post->kategori_id=$request->kategori;
-        $post->image_post=$request->image_post;
-        dd($post);
+        $post->image_post=$filename;
+        //dd($post);
+        $post->save();
+        $post-tags()->sync($request->tags, false);     
+        } else{
+           //$post=Post::find($post);
+           $post->judul=$request->judul;
+           $post->isi_post=$request->isi_post;
+           $post->kategori_id=$request->kategori;
+           //dd($post);
+           $post->save();
+           $post->tags()->sync($request->tags, false);  
         }
-        return $post;
         
+        return redirect()->route('posthitam.show',$post->id);
     }
 
     /**
@@ -137,6 +161,9 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $post=Post::find($id);
+       if(!$post->image_post == 0) {
+        unlink(public_path('uploadPost/',$post->image_post));
+        }
+        return redirect()->route('posthitam.index');      }
     }
-}
