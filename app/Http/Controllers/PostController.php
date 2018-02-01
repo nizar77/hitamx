@@ -118,27 +118,31 @@ class PostController extends Controller
         $post=Post::find($post);
         $slug = str_slug($request->judul); 
         if($request->hasFile('image_post')){
-            if(!$post->image_post == 0){
-                unlink(public_path('uploadPost/'.$post->image_post));
-          }
-        $filename = time().'_'.$slug.'.'.GetOriginalClientExtension();
+       $filename = time().'-'.$slug.'.'.request()->image_post->getClientOriginalExtension();
         request()->image_post->move(public_path('uploadPost'),$filename);
-            
+         
         $post->judul=$request->judul;
         $post->isi_post=$request->isi_post;
         $post->kategori_id=$request->kategori;
         $post->image_post=$filename;
-        //dd($post);
+        
         $post->save();
-        $post-tags()->sync($request->tags, false);     
-        } else{
-           //$post=Post::find($post);
+         if(isset($request->tags)){
+         $post-tags()->sync($request->tags);   
+         }else{
+           $post->tags()->sync(array());
+        }
+          
+        }
+
+        else {
+           $post=Post::find($post);
            $post->judul=$request->judul;
            $post->isi_post=$request->isi_post;
            $post->kategori_id=$request->kategori;
            //dd($post);
            $post->save();
-           $post->tags()->sync($request->tags, false);  
+           $post->tags()->sync($request->tags);  
         }
         
         return redirect()->route('posthitam.show',$post->id);
@@ -154,7 +158,14 @@ class PostController extends Controller
     {
        $post=Post::find($id);
        if(!$post->image_post == 0) {
-        unlink(public_path('uploadPost/',$post->image_post));
+        unlink(public_path('uploadPost/').$post->image_post);
+        $post->tags()->detach();
+        $post->delete();
+        }else{
+         //$post = Post::find($id);
+         $post->tags()->detach();
+         $post->delete();   
         }
+        
         return redirect()->route('posthitam.index');      }
     }
