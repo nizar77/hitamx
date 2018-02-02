@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\models\Gambar;
+use App\models\Album;
 use Session;
 use Image;
 
@@ -35,5 +36,21 @@ class ImageController extends Controller
         	->with('imageName',$input['imagename']);
 
     }
+    public function uploadGaleri($album_id)
+    {
+       $album=Album::find($album_id);
+       return view('album.upload')->withAlbum($album);
+    }
+
+    public function postGaleri(Request $request )
+    {
+        $galeri = new Gambar;
+        $galeri->album_id=$request->album_id;
+        $galeri->deskripsi=$request->deskripsi;
+        $galeri->image='gambar';
+        dd($galeri);
+        return redirect()->back();
+    }
+
 
    }

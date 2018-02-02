@@ -73,6 +73,7 @@ class AlbumController extends Controller
 
     }
 
+   
     /**
      * Show the form for editing the specified resource.
      *
@@ -84,7 +85,6 @@ class AlbumController extends Controller
         $album=Album::find($album);
         return View('album.edit',compact('album'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -129,6 +129,11 @@ class AlbumController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $album=Album::findOrFail($id);
+        if(!$album->cover_album==0){
+            unlink($album->cover_album);
+        }
+        $album->delete();
+        return redirect()->route('album.index');
     }
 }

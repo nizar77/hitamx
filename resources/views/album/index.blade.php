@@ -9,7 +9,7 @@
                   <th>title</th>
                   <th>deskripsi</th>
                   <th>cover</th>
-                  <th>action</th>
+                  <th class="text-right"><h3>{{ Html::link('admin/create','',['class'=>'btn btn-success glyphicon glyphicon-plus-sign']) }}</h3></th>
               </tr>
               </thead>
               <tbody>
@@ -19,9 +19,10 @@
                     <td>{{$album->nama}}</td>
                       <td>{{$album->deskripsi}}</td>
                       <td>{{$album->cover_album}}</td>
-                      <td>{!! Form::open()!!}
+                      <td class="text-right">
                           <a href="{{route('album.show',$album->id)}}" class="btn btn-primary btn-xs">view</a>
-                          {!!FOrm::close()!!}
+                          <a href ="{{route('galeri_upload',$album->id)}}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-upload"></i> Upload</a> 
+
                       </td>
                   </tr>
                   @endforeach
