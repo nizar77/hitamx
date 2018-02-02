@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\models\Album;
+use Session;
 class AlbumController extends Controller
 {
     /**
@@ -13,7 +14,9 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        //
+        $albums = Album::orderBy('id', 'DESC')->get();
+        return view('album.index',['albums'=>$albums]);
+
     }
 
     /**
@@ -34,7 +37,27 @@ class AlbumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $album =new Album;
+        $slug=str_slug($request->title);
+        if($request->hasFile('cover')){
+            $path1=('albums/');
+            $filename = $path1.time().'-'.$slug.'.'.$request->cover->getClientOriginalExtension();
+            $path = ('albums');
+            $request->cover->move($path,$filename);
+        $album->user_id="1";
+        $album->nama=$request->title;
+        $album->deskripsi=$request->deskripsi;
+        $album->cover_album=$filename;
+        $album->save();
+        }else{
+            $album->user_id="1";
+            $album->nama=$request->title;
+            $album->deskripsi=$request->deskripsi;
+            //dd($album);
+            $album->save();
+            return view('album.index');
+
+        }
     }
 
     /**
@@ -45,7 +68,9 @@ class AlbumController extends Controller
      */
     public function show($id)
     {
-        //
+        $album=Album::find($id);
+        return view('album.show',compact('album'));
+
     }
 
     /**
@@ -54,9 +79,10 @@ class AlbumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($album)
     {
-        //
+        $album=Album::find($album);
+        return View('album.edit',compact('album'));
     }
 
     /**
@@ -66,9 +92,33 @@ class AlbumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $album)
     {
-        //
+        $album1 = Album::find($album);
+        $slug=str_slug($request->title);
+        if($request->hasFile('cover')){
+
+            if(!$album1->cover_album == 0){
+                unlink($album1->cover_album);
+            }
+            $path1=('albums/');
+            $filename = $path1.time().'-'.$slug.'.'.$request->cover->getClientOriginalExtension();
+            $path=('albums');
+            $request->cover->move($path,$filename);
+
+            $album1->nama=$request->title;
+            $album1->deskripsi=$request->deskripsi;
+            $album1->cover_album=$filename;
+            //dd($album1); 
+            //
+            $album1->save();          
+        }else{
+          $album1->nama=$request->title;
+          $album1->deskripsi=$request->deskripsi;
+          //dd($album1);
+          $album1->save();
+        }
+        return redirect()->route('album.index');
     }
 
     /**
