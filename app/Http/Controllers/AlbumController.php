@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\models\Album;
 
 class AlbumController extends Controller
 {
@@ -13,7 +14,8 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        //
+        $albums = Album::orderBY('id','DESC')->get();
+	     return view('album.index')->withAlbums($albums);
     }
 
     /**
@@ -34,8 +36,25 @@ class AlbumController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $album = New Album;
+		if($request->hasFile('cover_album')){
+			$filename=time().'-'.$request->title.'.'.$request->cover_album->getClientOriginalExtension();
+			$request->cover_album->move('images',$filename); 
+		$album->user_id="1";
+		$album->nama=$request->title;
+		$album->deskripsi = $request->deskripsi;
+		$album->cover_album = $filename;
+		//dd($album);
+		$album->save();
+		}else{
+		$album=New Album;	
+		$album->user_id="1";
+		$album->nama=$request->title;
+		$album->deskripsi=$request->deskripsi;
+		$album->save();	
+		}
+		return redirect()->route('album.index');
+	}
 
     /**
      * Display the specified resource.
@@ -45,7 +64,8 @@ class AlbumController extends Controller
      */
     public function show($id)
     {
-        //
+        $album=Album::find($id);
+	return view('album.show',compact('album'));
     }
 
     /**

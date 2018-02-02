@@ -17,8 +17,8 @@ class CreateAlbumsTable extends Migration
             $table->increments('id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->string('nama');
-            $table->text('deskripsi');
-            $table->string('cover_album');
+            $table->text('deskripsi')->nullable();
+            $table->string('cover_album')->nullable();
             $table->timestamps();
         });
     }
