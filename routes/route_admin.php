@@ -15,5 +15,7 @@ Route::Resource('/posthitam','PostController');
 Route::get('resizeImage', 'ImageController@resizeImage');
 Route::post('resizeImagePost','ImageController@resizeImagePost')->name('resizeImagePost');
 
+Route::get('galeri_upload/{album_id}','ImageController@uploadGaleri')->name('galeri_upload');
+Route::post('post_Galeri','ImageController@postGaleri')->name('post_Galeri');
 
 
