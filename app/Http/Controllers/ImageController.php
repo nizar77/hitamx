@@ -34,7 +34,6 @@ class ImageController extends Controller
         return back()
         	->with('success','Image Upload successful')
         	->with('imageName',$input['imagename']);
-
     }
     public function uploadGaleri($album_id)
     {
@@ -45,12 +44,47 @@ class ImageController extends Controller
     public function postGaleri(Request $request )
     {
         $galeri = new Gambar;
+        $slug=$request->album_id;
+        $path1=('albums/galeri/');
+        if($request->hasFile('image_galeri')){
+            $filename=$path1.'-'.time().'-'.$slug.'.'.$request->image_galeri->getClientOriginalExtension();
+            $request->image_galeri->move($path1,$filename);
+
         $galeri->album_id=$request->album_id;
         $galeri->deskripsi=$request->deskripsi;
-        $galeri->image='gambar';
-        dd($galeri);
-        return redirect()->back();
+        $galeri->image=$filename;
+        //dd($galeri);
+        $galeri->save();
+        } else{
+            $galeri->album_id=$request->album_id;           
+            $galeri->deskripsi=$request->deskripsi;
+            $galeri->save();
+        }
+        return redirect()->route('galeri');
     }
+    public function index()
+    {
+       $galeris=Gambar::get();//groupBy('album_id');
+       return view('galeri.index',compact('galeris'));   
+    } 
+    public function show($id)
+    {
+        $galeri=Gambar::find($id);
+        return view ('galeri.show',compact('galeri'));
+    }
+    public function edit($id)
+    {
+        $galeri=Gambar::find($id);
+        return view('galeri.edit',compact('galeri'));
 
-
+    }
+    public function destroy($id)
+    {
+        $galeri=Gambar::find($id);
+        if(!$galeri->image==0){
+            unlink($galeri->image);
+        }
+        $galeri->delete();
+        return redirect()->route('galeri');  
+    }
    }

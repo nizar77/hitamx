@@ -29,7 +29,7 @@
 		<div class="form-group">
 			{{Form::label('cover','Cover Album',['class' => 'control-label col-md-2'])}}
 			<div class="col-md-9 col-md-offset-2">
-			<input type="file" class="btn btn-success" name="cover_album"/>
+			<input type="file" class="btn btn-success" name="cover"/>
 			</div>
 		</div>
 		 

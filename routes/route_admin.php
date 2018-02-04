@@ -17,5 +17,10 @@ Route::post('resizeImagePost','ImageController@resizeImagePost')->name('resizeIm
 
 Route::get('galeri_upload/{album_id}','ImageController@uploadGaleri')->name('galeri_upload');
 Route::post('post_Galeri','ImageController@postGaleri')->name('post_Galeri');
+Route::get('galeri/show/{galeri}','ImageController@show')->name('galeri.show');
+Route::get('galeri','ImageController@index')->name('galeri');
+Route::get('galeri/{galeri}/edit','ImageController@edit')->name('galeri.edit');
+Route::patch('galeri/{galeri}','ImageController@update')->name('galeri.update');
+Route::delete('galeri/{galeri}','ImageController@destroy')->name('galeri.destroy');
 
 

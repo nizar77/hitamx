@@ -16,9 +16,10 @@ class AlbumController extends Controller
     public function index()
     {
         $albums = Album::orderBy('id', 'DESC')->get();
-        return view('album.index',['albums'=>$albums]);
+        return view('album.index',compact('albums'));
 
     }
+	
 
     /**
      * Show the form for creating a new resource.
@@ -38,28 +39,27 @@ class AlbumController extends Controller
      */
     public function store(Request $request)
     {
-        $album =new Album;
+      $album =new Album;
         $slug=str_slug($request->title);
         if($request->hasFile('cover')){
             $path1=('albums/');
             $filename = $path1.time().'-'.$slug.'.'.$request->cover->getClientOriginalExtension();
             $path = ('albums');
             $request->cover->move($path,$filename);
-        $album->user_id="1";
-        $album->nama=$request->title;
-        $album->deskripsi=$request->deskripsi;
-        $album->cover_album=$filename;
-        $album->save();
+            $album->user_id="1";
+            $album->nama=$request->title;
+            $album->deskripsi=$request->deskripsi;
+            $album->cover_album=$filename;
+            $album->save();
         }else{
             $album->user_id="1";
             $album->nama=$request->title;
             $album->deskripsi=$request->deskripsi;
             //dd($album);
-            $album->save();
-            return view('album.index');
-
+            $album->save();  
         }
-    }
+        return redirect()->route('album.index');
+   }
 
     /**
      * Display the specified resource.
@@ -109,13 +109,10 @@ class AlbumController extends Controller
             $album1->nama=$request->title;
             $album1->deskripsi=$request->deskripsi;
             $album1->cover_album=$filename;
-            //dd($album1); 
-            //
             $album1->save();          
         }else{
           $album1->nama=$request->title;
           $album1->deskripsi=$request->deskripsi;
-          //dd($album1);
           $album1->save();
         }
         return redirect()->route('album.index');
