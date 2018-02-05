@@ -9,7 +9,7 @@
 @endsection
 @section('content')
 <div class="container">
-        <div class="row">
+   <div class="row">
 	<div class="col-md-11 col-md-offset-1">
         
         {!! Form::open(['route'=>['post_Galeri'], 'method'=>'POST','class'=>'form-horizontal', 'files'=>true]) !!}
@@ -30,9 +30,9 @@
         </div>
         
 		<div class="form-group">
-			{{Form::label('cover','Cover Album',array('class'=>'control-label col-md-2'))}}
+			{{Form::label('image_galeri','Cover Album',array('class'=>'control-label col-md-2'))}}
 			<div class="col-md-9">
-			{{ Form::file('gambar_galeri',['class'=>'btn btn-success']) }}
+			{{ Form::file('image_galeri',['class'=>'btn btn-success']) }}
 			</div>
         </div>
         <div class="form-group">
@@ -41,8 +41,7 @@
              </div>
         </div>
 		{!! Form::close() !!}
-		</div>
-		
+		</div>		
 	</div>
 </div>
 @endsection

@@ -64,8 +64,8 @@ class ImageController extends Controller
     }
     public function index()
     {
-       $galeris=Gambar::get();//groupBy('album_id');
-       return view('galeri.index',compact('galeris'));   
+       $galeris = Gambar::get();//groupBy('album_id');
+       return view('galeri2.index'compact('galeris'));   
     } 
     public function show($id)
     {
@@ -87,4 +87,5 @@ class ImageController extends Controller
         $galeri->delete();
         return redirect()->route('galeri');  
     }
+
    }
